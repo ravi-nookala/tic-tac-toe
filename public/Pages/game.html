@@ -1,0 +1,62 @@
+<!-- <div class="jumbotron text-center">
+        <p>Sai</p>
+    </div> -->
+    <style>
+      * {
+ /* text-align: center;*/
+  font-family: "Courier"
+}
+
+body {
+  /*padding: 20px 40px;*/
+  font-family: "Verdana";
+}
+
+h1 {
+  margin: 20px;
+}
+
+.t3cell {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+}
+.dynaClass{
+  pointer-events:none;
+}
+    </style>
+
+    <div style="text-align: center;">
+      <h2 ng-if="win !== undefined && win !== 'none' && win !== 'Draw' ">Winner is : <span style="color:blue">{{win}}</span></h2>
+      <h2 ng-if="win == 'Draw' ">Match is : <span style="color:red">{{win}}</span></h2>
+    </div>
+    
+    <div class="container" id="gameController" style="text-align: center;">
+      <div class="well" ng-class="{dynaClass: win == 'X' || win == 'O'}">
+       <div ng-repeat = "day in days">
+         <div><button class="btn-primary btn-lg"  ng-repeat="x in day.board[0]" id="{{$index}}" ng-disabled="isTaken(x);" ng-click="move(x,0,$index);">{{ x.value }}</button></div>
+        <div><button class="btn-primary btn-lg"  ng-repeat="x in day.board[1]" id="{{$index}}" ng-disabled="isTaken(x);" ng-click="move(x,1,$index);">{{ x.value }}</button></div>
+        <div><button class="btn-primary btn-lg"  ng-repeat="x in day.board[2]" id="{{$index}}" ng-disabled="isTaken(x);" ng-click="move(x,2,$index);">{{ x.value }}</button></div>
+       </div>
+       
+        <br/>
+        <p>
+          <span ng-hide="winner || cat">Current Player: {{ currentPlayer }}</span>
+          <span ng-show="winner">Player {{ currentPlayer }} won!</span>
+          <span ng-show="cat">Cat</span>
+        </p>
+      </div>
+    </div>
+          
+     <div class="text-center">
+      <button ng-click="back()" class="btn btn-primary btn-large" style="text-align: center;">Back</button>
+     </div>
+    
+
+    <div style="text-align: center;">
+      <p>Game Id : {{gameId}}</p>
+      <p>Please send this url to another player</p>
+      <p>https://tictactoe-a4395.firebaseapp.com/#/game/{{gameId}}</p>
+      
+    </div>
